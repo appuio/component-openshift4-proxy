@@ -13,13 +13,16 @@ local ca_bundle = kube.ConfigMap(ca_bundle_name) {
   },
 };
 
-// see: https://docs.openshift.com/container-platform/latest/networking/enable-cluster-wide-proxy.html
-local proxy_config = kube._Object('config.openshift.io/v1', 'Proxy', 'cluster') {
-  spec+: params.spec {
-    [if has_ca_bundle then 'trustedCA']: {
-      name: ca_bundle_name,
-    },
+local spec = params.spec {
+  httpProxy: params.httpProxy,
+  httpsProxy: params.httpsProxy,
+  [if std.length(params.noProxy) > 0 then 'noProxy']: std.join(',', params.noProxy),
+  [if has_ca_bundle then 'trustedCA']: {
+    name: ca_bundle_name,
   },
+};
+local proxy_config = kube._Object('config.openshift.io/v1', 'Proxy', 'cluster') {
+  spec+: std.prune(spec),
 };
 
 // Define outputs below

@@ -6,8 +6,8 @@ metadata:
     name: cluster
   name: cluster
 spec:
-  httpProxy: http://example.com:1234/
-  httpsProxy: http://example.com:1234/
+  httpProxy: http://example.com:1234
+  httpsProxy: http://example.com:1234
   noProxy: example.com,foo.com
   readinessEndpoints:
     - http://www.google.com

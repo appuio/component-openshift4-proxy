@@ -2,17 +2,29 @@
 
 The parent key for all of the following parameters is `openshift4_proxy`.
 
-== `spec`
 
+== `httpProxy`
 [horizontal]
-type:: dict
-default:: `{}`
+type:: string
+default:: `null`
 
-OpenShift 4 Proxy configuration as documented in https://docs.openshift.com/container-platform/latest/networking/enable-cluster-wide-proxy.html["Configuring the cluster-wide proxy" in the official OpenShift docs].
+HTTP proxy to use.
 
-Also see: https://docs.openshift.com/container-platform/4.11/rest_api/config_apis/proxy-config-openshift-io-v1.html#spec[Proxy (config.openshift.io/v1) API documentation]
 
-Note that the `trustedCA` entry will be overwritten by the component. Put your certificates in `trustedCA` outside of `spec`
+== `httpsProxy`
+[horizontal]
+type:: string
+default:: _value of `httpProxy`_
+
+HTTPS proxy to use.
+
+
+== `noProxy`
+[horizontal]
+type:: array of strings
+default:: `[]`
+
+No-proxy list to use.
 
 
 == `trustedCA`
@@ -23,21 +35,35 @@ default:: `null`
 Additional CA certificates to be configured on the cluster. They will be stored in the `user-ca-bundle` ConfigMap in the `openshift-config` namespace.
 
 
+== `spec`
+
+[horizontal]
+type:: dict
+default:: `{}`
+
+Additional OpenShift 4 Proxy configuration as documented in https://docs.openshift.com/container-platform/latest/networking/enable-cluster-wide-proxy.html["Configuring the cluster-wide proxy" in the official OpenShift docs].
+
+Also see: https://docs.openshift.com/container-platform/4.11/rest_api/config_apis/proxy-config-openshift-io-v1.html#spec[Proxy (config.openshift.io/v1) API documentation]
+
+Note that the `httpProxy`, `httpsProxy`, `noProxy` and `trustedCA` entries will be overwritten by whatever was configured above.
+
+
 == Example
 
 
 [source,yaml]
 ----
-# Note that this entry is NOT under `spec`
+httpProxy: http://<username>:<pswd>@<ip>:<port>
+noProxy:
+  - example.com
+  - 10.20.30.0/24
+
 trustedCA: |
   -----BEGIN CERTIFICATE-----
   ...
   -----END CERTIFICATE-----
 
 spec:
-  httpProxy: http://<username>:<pswd>@<ip>:<port>
-  httpsProxy: http://<username>:<pswd>@<ip>:<port>
-  noProxy: example.com
   readinessEndpoints:
     - http://www.google.com
     - https://www.google.com

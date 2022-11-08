@@ -4,4 +4,7 @@ parameters:
     =_metadata: {}
     namespace: openshift4-proxy
     trustedCA: null
+    httpProxy: null
+    httpsProxy: "${openshift4_proxy:httpProxy}"
+    noProxy: []
     spec: {}
