@@ -1,4 +1,7 @@
+---
 parameters:
   openshift4_proxy:
     =_metadata: {}
-    namespace: syn-openshift4-proxy
+    namespace: openshift4-proxy
+    trustedCA: null
+    spec: {}

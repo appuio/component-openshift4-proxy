@@ -2,18 +2,43 @@
 
 The parent key for all of the following parameters is `openshift4_proxy`.
 
-== `namespace`
+== `spec`
 
 [horizontal]
-type:: string
-default:: `syn-openshift4-proxy`
+type:: dict
+default:: `{}`
 
-The namespace in which to deploy this component.
+OpenShift 4 Proxy configuration as documented in https://docs.openshift.com/container-platform/latest/networking/enable-cluster-wide-proxy.html["Configuring the cluster-wide proxy" in the official OpenShift docs].
+
+Also see: https://docs.openshift.com/container-platform/4.11/rest_api/config_apis/proxy-config-openshift-io-v1.html#spec[Proxy (config.openshift.io/v1) API documentation]
+
+Note that the `trustedCA` entry will be overwritten by the component. Put your certificates in `trustedCA` outside of `spec`
+
+
+== `trustedCA`
+[horizontal]
+type:: string
+default:: `null`
+
+Additional CA certificates to be configured on the cluster. They will be stored in the `user-ca-bundle` ConfigMap in the `openshift-config` namespace.
 
 
 == Example
 
+
 [source,yaml]
 ----
-namespace: example-namespace
+# Note that this entry is NOT under `spec`
+trustedCA: |
+  -----BEGIN CERTIFICATE-----
+  ...
+  -----END CERTIFICATE-----
+
+spec:
+  httpProxy: http://<username>:<pswd>@<ip>:<port>
+  httpsProxy: http://<username>:<pswd>@<ip>:<port>
+  noProxy: example.com
+  readinessEndpoints:
+    - http://www.google.com
+    - https://www.google.com
 ----
