@@ -1,0 +1,14 @@
+---
+parameters:
+  openshift4_proxy:
+    trustedCA: |
+      -----BEGIN CERTIFICATE-----
+      ...
+      -----END CERTIFICATE-----
+    spec:
+      httpProxy: http://example.com:1234/
+      httpsProxy: http://example.com:1234/
+      noProxy: example.com,foo.com
+      readinessEndpoints:
+        - http://www.google.com
+        - https://www.google.com
