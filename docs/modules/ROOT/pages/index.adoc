@@ -1,0 +1,5 @@
+= openshift4-proxy
+
+openshift4-proxy is a Commodore component to manage openshift4-proxy.
+
+See the xref:references/parameters.adoc[parameters] reference for further details.

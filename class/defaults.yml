@@ -1,0 +1,4 @@
+parameters:
+  openshift4_proxy:
+    =_metadata: {}
+    namespace: syn-openshift4-proxy

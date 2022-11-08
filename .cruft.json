@@ -1,0 +1,25 @@
+{
+  "template": "https://github.com/projectsyn/commodore-component-template.git",
+  "commit": "0f8aa8baef803c2f09d710c717f26f7eff145407",
+  "checkout": "main",
+  "context": {
+    "cookiecutter": {
+      "name": "openshift4-proxy",
+      "slug": "openshift4-proxy",
+      "parameter_key": "openshift4_proxy",
+      "test_cases": "defaults",
+      "add_lib": "n",
+      "add_pp": "n",
+      "add_golden": "y",
+      "add_matrix": "y",
+      "add_go_unit": "n",
+      "copyright_holder": "VSHN AG <info@vshn.ch>",
+      "copyright_year": "2022",
+      "github_owner": "appuio",
+      "github_name": "component-openshift4-proxy",
+      "github_url": "https://github.com/appuio/component-openshift4-proxy",
+      "_template": "https://github.com/projectsyn/commodore-component-template.git"
+    }
+  },
+  "directory": null
+}
