@@ -9,7 +9,9 @@ data:
     '
 kind: ConfigMap
 metadata:
-  annotations: {}
+  annotations:
+    argocd.argoproj.io/compare-options: IgnoreExtraneous
+    argocd.argoproj.io/sync-options: Prune=false
   labels:
     name: user-ca-bundle
   name: user-ca-bundle

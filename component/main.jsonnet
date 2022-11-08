@@ -8,6 +8,13 @@ local params = inv.parameters.openshift4_proxy;
 local has_ca_bundle = params.trustedCA != null;
 local ca_bundle_name = 'user-ca-bundle';
 local ca_bundle = kube.ConfigMap(ca_bundle_name) {
+  metadata+: {
+    annotations+: {
+      // configure ArgoCD to ignore the copy of this configmap which is created by OpenShift
+      'argocd.argoproj.io/sync-options': 'Prune=false',
+      'argocd.argoproj.io/compare-options': 'IgnoreExtraneous',
+    },
+  },
   data: {
     'ca-bundle.crt': params.trustedCA,
   },
