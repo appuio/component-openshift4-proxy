@@ -2,7 +2,7 @@
 parameters:
   openshift4_proxy:
     =_metadata: {}
-    namespace: openshift4-proxy
+    namespace: openshift-config
     trustedCA: null
     httpProxy: null
     httpsProxy: "${openshift4_proxy:httpProxy}"
