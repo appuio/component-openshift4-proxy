@@ -1,7 +1,8 @@
 ---
 parameters:
   openshift4_proxy:
-    =_metadata: {}
+    =_metadata:
+      multi_tenant: true
     namespace: openshift-config
     trustedCA: null
     httpProxy: null
